@@ -165,13 +165,25 @@ def build_graph() -> dict:
 # Retrieval: keyword match + transitive link traversal
 # --------------------------------------------------------------------------
 
+# Common words excluded from question tokens so they can't spuriously
+# match a content word buried in an unrelated file's name (e.g. the
+# "and" in "Material and QA Standards" matching the "and" in a question
+# that has nothing to do with QA standards).
+STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "by", "did", "do", "does",
+    "for", "from", "has", "have", "how", "in", "is", "it", "of", "on",
+    "or", "that", "the", "this", "to", "was", "we", "were", "what",
+    "when", "where", "which", "who", "why", "will", "with", "would",
+}
+
+
 def tokenize(text: str) -> set:
     return set(re.findall(r"[a-z0-9]+", text.lower()))
 
 
 def find_seed_ids(question: str, graph: dict) -> set:
     """Match question keywords against each file's id, name, and tags."""
-    question_tokens = tokenize(question)
+    question_tokens = tokenize(question) - STOPWORDS
     seeds = set()
 
     for file_id, record in graph.items():
@@ -192,16 +204,18 @@ def expand_via_related_links(seed_ids: set, graph: dict) -> set:
     customer_001 should pull in its project, which pulls in the
     product and the wear report, etc.
 
-    Traversal does NOT continue past `type: rule` nodes. Rule files
-    (design_rules, standards) are referenced from almost every product
-    and project, so they act as hub nodes — without this cutoff, a
-    query about one customer would transitively pull in every other
-    customer and product through the shared rule files. Rules are
-    still always *included* (and cited) when reached; they just don't
-    bridge the traversal onward.
+    Traversal does NOT continue past `type: rule` nodes, whether a rule
+    node is reached via expansion OR is itself a seed (e.g. a generic
+    word in a rule file's name happens to match the question). Rule
+    files (design_rules, standards) are referenced from almost every
+    product and project, so they act as hub nodes — without this
+    cutoff, a query about one customer would transitively pull in
+    every other customer and product through the shared rule files.
+    Rules are still always *included* (and cited) when reached; they
+    just don't bridge the traversal onward.
     """
     selected = set(seed_ids)
-    frontier = set(seed_ids)
+    frontier = {file_id for file_id in seed_ids if graph[file_id]["type"] != "rule"}
 
     while frontier:
         next_frontier = set()
