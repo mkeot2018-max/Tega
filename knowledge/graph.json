@@ -1,0 +1,139 @@
+{
+  "customer_001": {
+    "file": "customers/customer_001/profile.md",
+    "name": "Minera Los Andes Cobre (Chile)",
+    "related": [
+      "project_customer_001_trommel",
+      "report_wear_2026_01",
+      "product_trommel_panel"
+    ],
+    "tags": [
+      "copper",
+      "chile",
+      "mining",
+      "trommel",
+      "polyurethane"
+    ],
+    "type": "customer"
+  },
+  "customer_002": {
+    "file": "customers/customer_002/profile.md",
+    "name": "Greenfield Aggregates Ltd (UK)",
+    "related": [
+      "product_hydrocyclone"
+    ],
+    "tags": [
+      "aggregates",
+      "uk",
+      "hydrocyclone",
+      "rubber"
+    ],
+    "type": "customer"
+  },
+  "product_hydrocyclone": {
+    "file": "products/hydrocyclone.md",
+    "name": "Tega Hydrocyclone Liner",
+    "related": [
+      "rule_standards",
+      "rule_design_rules",
+      "customer_002"
+    ],
+    "tags": [
+      "hydrocyclone",
+      "liner",
+      "polyurethane",
+      "rubber",
+      "classification"
+    ],
+    "type": "product"
+  },
+  "product_trommel_panel": {
+    "file": "products/trommel_panel.md",
+    "name": "Tega Trommel Panel (Modular PU/Rubber)",
+    "related": [
+      "rule_design_rules",
+      "rule_standards",
+      "project_customer_001_trommel",
+      "report_wear_2026_01"
+    ],
+    "tags": [
+      "trommel",
+      "polyurethane",
+      "rubber",
+      "panel",
+      "mining"
+    ],
+    "type": "product"
+  },
+  "project_customer_001_trommel": {
+    "file": "customers/customer_001/projects.md",
+    "name": "Los Andes Cobre \u2014 Trommel Screen Panel Retrofit",
+    "related": [
+      "customer_001",
+      "product_trommel_panel",
+      "report_wear_2026_01",
+      "rule_design_rules"
+    ],
+    "tags": [
+      "copper",
+      "chile",
+      "trommel",
+      "polyurethane",
+      "retrofit"
+    ],
+    "type": "project"
+  },
+  "report_wear_2026_01": {
+    "file": "customers/customer_001/reports/wear_report_2026_01.md",
+    "name": "Los Andes Cobre \u2014 Trommel Panel Wear Inspection (Jan 2026)",
+    "related": [
+      "project_customer_001_trommel",
+      "product_trommel_panel",
+      "customer_001"
+    ],
+    "tags": [
+      "copper",
+      "chile",
+      "trommel",
+      "wear",
+      "polyurethane",
+      "inspection"
+    ],
+    "type": "report"
+  },
+  "rule_design_rules": {
+    "file": "rules/design_rules.md",
+    "name": "Screening Panel Design Rules",
+    "related": [
+      "product_trommel_panel",
+      "product_hydrocyclone",
+      "rule_standards"
+    ],
+    "tags": [
+      "design",
+      "rules",
+      "thickness",
+      "tolerance",
+      "material",
+      "fixing"
+    ],
+    "type": "rule"
+  },
+  "rule_standards": {
+    "file": "rules/standards.md",
+    "name": "Material and QA Standards",
+    "related": [
+      "product_trommel_panel",
+      "product_hydrocyclone",
+      "rule_design_rules"
+    ],
+    "tags": [
+      "standards",
+      "qa",
+      "testing",
+      "inspection",
+      "material"
+    ],
+    "type": "rule"
+  }
+}
